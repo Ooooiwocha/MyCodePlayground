@@ -1,7 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <set>
-template<typename N> std::istream& operator>>(std::istream& is, std::pair<N, N>& obj){
+template<typename N, typename M> std::istream& operator>>(std::istream& is, std::pair<N, M>& obj){
     return is >> obj.first >> obj.second;
 }
 template<typename N, typename M> std::ostream& operator<<(std::ostream& os, const std::pair<N, M>& obj){
@@ -33,7 +33,7 @@ template<typename N> std::ostream& operator<<(std::ostream& os, const std::vecto
     }
     return os;
 }
-template<typename N = int> class range{
+template<typename N> class range{
     private:
         const N start, end, step;
     public:
@@ -59,7 +59,6 @@ template<typename N = int> class range{
             }
             return ret;
         }
-    
 };
 template<typename N = int, class R = range<N>> class __vector: public std::vector<N>{
     public:
@@ -72,9 +71,6 @@ template<typename N = int, class R = range<N>> class __vector: public std::vecto
             long long int __index = 0<=index? index: this->size() + index; 
             return this->at(__index);
         }
-        N operator[](size_t index){
-            return this->at(index);
-        }
         __vector<N> operator[](R slice){
             __vector<N> ret;
             for(auto const &i: slice.to_vector()){
@@ -86,6 +82,8 @@ template<typename N = int, class R = range<N>> class __vector: public std::vecto
 
 int main() {
     __vector<int> vec{1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+    std::cout << vec << std::endl;
     std::cout << vec[range(-8, 2, 1)] << std::endl;
+    std::cout << vec[-8] << std::endl;
     return 0;
 }
