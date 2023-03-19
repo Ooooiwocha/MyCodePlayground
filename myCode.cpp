@@ -63,6 +63,11 @@ template<typename N> class range{
 template<typename N = int, class R = range<N>> class __vector: public std::vector<N>{
     public:
         using std::vector<N>::vector;
+        explicit __vector(std::vector<N> v){
+            for(auto it=v.begin(); it!=v.end(); it++){
+                this->push.back(*it);
+            }
+        }
         N at(long long int index){
             long long int __index = 0<=index? index: this->size() + index;
             return this->std::vector<N>::at(__index);
