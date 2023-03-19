@@ -33,6 +33,16 @@ template<typename N> std::ostream& operator<<(std::ostream& os, const std::vecto
     }
     return os;
 }
+template<typename N> std::ostream& operator<<=(std::ostream& os, const std::vector<N>& obj){
+    for(auto it=obj.begin(); it!=obj.end(); it++){
+        os << *it;
+        if (it!=std::prev(obj.end())){
+            os << "\r\n";
+        }
+    }
+    return os;
+}
+
 template<typename N> class range{
     private:
         const N start, end, step;
@@ -90,5 +100,9 @@ int main() {
     std::cout << vec << std::endl;
     std::cout << vec[range(-8, 2, 1)] << std::endl;
     std::cout << vec[-8] << std::endl;
+    int n; std::cin >> n;
+    __vector<int> v(n);
+    std::cin >> v;
+    std::cout << v;
     return 0;
 }
