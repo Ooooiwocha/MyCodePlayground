@@ -33,15 +33,6 @@ template<typename N> std::ostream& operator<<(std::ostream& os, const std::vecto
     }
     return os;
 }
-template<typename N> std::ostream& operator<<=(std::ostream& os, const std::vector<N>& obj){
-    for(auto it=obj.begin(); it!=obj.end(); it++){
-        os << *it;
-        if (it!=std::prev(obj.end())){
-            os << "\r\n";
-        }
-    }
-    return os;
-}
 
 template<typename N> class range{
     private:
@@ -94,7 +85,16 @@ template<typename N = int, class R = range<N>> class __vector: public std::vecto
             return ret;
         }
 };
-
+template<class N> void print(N container, const char* sep=" ", const char* end="\n"){
+    auto prev_end = prev(container.end());
+    for(auto it=container.begin(); it!=container.end(); it++){
+        std::cout << *it;
+        if(it!=prev_end){
+            std::cout << sep;
+        }
+    }
+    std::cout << end;
+}
 int main() {
     __vector<int> vec{1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
     std::cout << vec << std::endl;
@@ -103,6 +103,8 @@ int main() {
     int n; std::cin >> n;
     __vector<int> v(n);
     std::cin >> v;
-    std::cout << v;
+    std::cout << v << std::endl;
+    std::cout << v << std::endl; 
+    print(std::string("aaa"), "_", "(EOF)\n");
     return 0;
 }
