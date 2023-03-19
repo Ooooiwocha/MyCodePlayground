@@ -20,7 +20,7 @@ template<typename N> std::ostream& operator<<(std::ostream& os, const std::set<N
 
 template<typename N> std::istream& operator>>(std::istream& is, std::vector<N>& obj){
     for(auto it=obj.begin(); it!=obj.end(); it++){
-        is >> obj[i];
+        is >> *it;
     }
     return is;
 }
