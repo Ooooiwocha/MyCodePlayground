@@ -62,7 +62,7 @@ template<typename N> class range{
             }
             return ret;
         }
-        range<N> to_slicer(size_t size)const{
+        std::vector<N> to_slicer(size_t size)const{
             auto lambda = [&](N a){
                 return 0 <= a? a: size + a;
             };
