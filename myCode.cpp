@@ -89,7 +89,7 @@ template<typename N = int, class R = range<N>> class __vector: public std::vecto
         }
 };
 /* Python-like print function */
-template<class N> void print(N container, const char* sep=" ", const char* end="\n"){ 
+template<class N> void print(N container, std::string sep=" ", std::string end="\n"){ 
     auto prev_end = prev(container.end());
     for(auto it=container.begin(); it!=container.end(); it++){
         std::cout << *it;
