@@ -62,6 +62,12 @@ template<typename N> class range{
             }
             return ret;
         }
+        range<N> to_slicer(size_t size)const{
+            auto lambda = [&](N a){
+                return 0 <= a? a: size + a;
+            };
+            return range(lambda(start), lambda(end), step);
+        }
 };
 /* slicable vector class */
 template<typename N = int, class R = range<N>> class __vector: public std::vector<N>{
@@ -82,7 +88,7 @@ template<typename N = int, class R = range<N>> class __vector: public std::vecto
         }
         __vector<N> operator[](R slice){ //Python-like slicing
             __vector<N> ret;
-            for(auto const &i: slice.to_vector()){
+            for(auto const &i: slice.to_slicer()){
                 ret.push_back(this->at(i));
             }
             return ret;
