@@ -88,7 +88,7 @@ template<typename N = int, class R = range<N>> class __vector: public std::vecto
         }
         __vector<N> operator[](R slice){ //Python-like slicing
             __vector<N> ret;
-            for(auto const &i: slice.to_slicer(this->size())){
+            for(auto const &i: slice.to_slicer(this->size()).to_vector()){
                 ret.push_back(this->at(i));
             }
             return ret;
