@@ -19,7 +19,7 @@ template<typename N> std::ostream& operator<<(std::ostream& os, const std::set<N
 }
 
 template<typename N> std::istream& operator>>(std::istream& is, std::vector<N>& obj){
-    for(int i=0; i<obj.size(); i++){
+    for(auto it=obj.begin(); it!=obj.end(); it++){
         is >> obj[i];
     }
     return is;
