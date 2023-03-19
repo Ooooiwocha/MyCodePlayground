@@ -1,14 +1,14 @@
 #include <iostream>
 #include <vector>
 #include <set>
-/* pair IO */
+/* std::pair IO */
 template<typename N, typename M> std::istream& operator>>(std::istream& is, std::pair<N, M>& obj){
     return is >> obj.first >> obj.second;
 }
 template<typename N, typename M> std::ostream& operator<<(std::ostream& os, const std::pair<N, M>& obj){
     return os << obj.first << " " << obj.second;
 }
-/* set O */
+/* std::set O */
 template<typename N> std::ostream& operator<<(std::ostream& os, const std::set<N>& obj){
     auto prev_end = std::prev(obj.end());
     for(auto it=obj.begin(); it!=obj.end(); it++){
@@ -19,7 +19,7 @@ template<typename N> std::ostream& operator<<(std::ostream& os, const std::set<N
     }
     return os;
 }
-/* vector IO */
+/* std::vector IO */
 template<typename N> std::istream& operator>>(std::istream& is, std::vector<N>& obj){
     for(auto it=obj.begin(); it!=obj.end(); it++){
         is >> *it;
