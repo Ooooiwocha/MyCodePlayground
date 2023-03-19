@@ -99,17 +99,11 @@ template<class N> void print(N container, std::string sep=" ", std::string end="
     }
     std::cout << end;
 }
+
+/*sample code*/
 using namespace std;
 int main() {
     __vector<int> vec{1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
-    std::cout << vec << std::endl;
-    std::cout << vec[range(-8, 2, 1)] << std::endl;
-    std::cout << vec[-8] << std::endl;
-    int n; std::cin >> n;
-    __vector<int> v(n);
-    std::cin >> v;
-    std::cout << v << std::endl;
-    std::cout << v << std::endl; 
-    print(std::string("aaa"), "_", "(EOF)\n");
+    print(vec[range(0, -1, 1)], "_", "(EOF)\n");
     return 0;
 }
