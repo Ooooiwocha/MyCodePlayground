@@ -106,11 +106,11 @@ template<class N> void print(N container, std::string sep=" ", std::string end="
     std::cout << end;
 }
 
-/*sample code*/
+/* example */
 using namespace std;
 int main() {
-    __vector<int> vec{1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
-    cout << vec[-5] << " " << set(vec.begin(), vec.end()) << endl;
-    print(vec[range(0, -1, 1)], "_", "(EOF)\n");
+    __vector<int> vec{0, 1, 2, 3, 4, 5};
+    cout << vec[-2] << " " << set(vec.begin(), vec.end()) << endl;
+    print(vec[range(2, -2, 1)], "_", "(EOF)\n");
     return 0;
 }
