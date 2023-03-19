@@ -1,12 +1,14 @@
 #include <iostream>
 #include <vector>
 #include <set>
+/* pair IO */
 template<typename N, typename M> std::istream& operator>>(std::istream& is, std::pair<N, M>& obj){
     return is >> obj.first >> obj.second;
 }
 template<typename N, typename M> std::ostream& operator<<(std::ostream& os, const std::pair<N, M>& obj){
     return os << obj.first << " " << obj.second;
 }
+/* set O */
 template<typename N> std::ostream& operator<<(std::ostream& os, const std::set<N>& obj){
     auto prev_end = std::prev(obj.end());
     for(auto it=obj.begin(); it!=obj.end(); it++){
@@ -17,7 +19,7 @@ template<typename N> std::ostream& operator<<(std::ostream& os, const std::set<N
     }
     return os;
 }
-
+/* vector IO */
 template<typename N> std::istream& operator>>(std::istream& is, std::vector<N>& obj){
     for(auto it=obj.begin(); it!=obj.end(); it++){
         is >> *it;
@@ -33,7 +35,7 @@ template<typename N> std::ostream& operator<<(std::ostream& os, const std::vecto
     }
     return os;
 }
-
+/* Python-like range class */
 template<typename N> class range{
     private:
         const N start, end, step;
@@ -61,6 +63,7 @@ template<typename N> class range{
             return ret;
         }
 };
+/* slicable vector class */
 template<typename N = int, class R = range<N>> class __vector: public std::vector<N>{
     public:
         using std::vector<N>::vector;
@@ -77,7 +80,7 @@ template<typename N = int, class R = range<N>> class __vector: public std::vecto
             long long int __index = 0<=index? index: this->size() + index; 
             return this->at(__index);
         }
-        __vector<N> operator[](R slice){
+        __vector<N> operator[](R slice){ //Python-like slicing
             __vector<N> ret;
             for(auto const &i: slice.to_vector()){
                 ret.push_back(this->at(i));
@@ -85,7 +88,8 @@ template<typename N = int, class R = range<N>> class __vector: public std::vecto
             return ret;
         }
 };
-template<class N> void print(N container, const char* sep=" ", const char* end="\n"){
+/* Python-like print function */
+template<class N> void print(N container, const char* sep=" ", const char* end="\n"){ 
     auto prev_end = prev(container.end());
     for(auto it=container.begin(); it!=container.end(); it++){
         std::cout << *it;
