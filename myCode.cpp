@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <set>
+#include <map>
 /* std::pair IO */
 template<typename N, typename M> std::istream& operator>>(std::istream& is, std::pair<N, M>& obj){
     return is >> obj.first >> obj.second;
@@ -10,6 +11,17 @@ template<typename N, typename M> std::ostream& operator<<(std::ostream& os, cons
 }
 /* std::set O */
 template<typename N> std::ostream& operator<<(std::ostream& os, const std::set<N>& obj){
+    auto prev_end = std::prev(obj.end());
+    for(auto it=obj.begin(); it!=obj.end(); it++){
+        os << *it;
+        if(it!=prev_end){
+            os << " ";
+        }
+    }
+    return os;
+}
+/*std::map O*/
+template<typename N, typename M> std::ostream& operator<<(std::ostream& os, const std::map<N, M>& obj){
     auto prev_end = std::prev(obj.end());
     for(auto it=obj.begin(); it!=obj.end(); it++){
         os << *it;
@@ -116,6 +128,6 @@ using namespace std;
 int main() {
     __vector<int> vec{0, 1, 2, 3, 4, 5};
     cout << vec[-2] << " " << set(vec.begin(), vec.end()) << endl;
-    print(vec[range(2, -2, 1)], "_", "(EOF)\n");
+    print(vec[range(5, -2, 1)], "_", "(EOF)\n");
     return 0;
 }
