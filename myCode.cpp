@@ -42,7 +42,8 @@ template<typename N> class range{
     public:
         range(const N& start, const N& end, const N& step): start(start), end(end), step(step){
             if(this->step == 0){
-                throw std::runtime_error("illegal_step: range step must not be zero");
+                throw std::runtime_error("illegal_parameter: range step must not be zero");
+                
             }
         }
         range(const N& i, const N& j): range(i, j, 1){
@@ -54,10 +55,12 @@ template<typename N> class range{
         std::vector<N> to_vector()const{
             std::vector<N> ret;
             if(0<step){
+                if(end<=start) return ret;
                 for(N i=start; i<end; i+=step){
                     ret.push_back(i);
                 }
             } else {
+                if(start<=end) return ret;
                 for(N i=start; i>end; i+=step){
                     ret.push_back(i);
                 }
