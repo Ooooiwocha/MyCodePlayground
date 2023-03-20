@@ -1,6 +1,4 @@
 #include <bits/stdc++.h>
-#define V __vector<long long int>
-#define Vi __vector<int>
 /* std::pair IO */
 template<typename N, typename M> std::istream& operator>>(std::istream& is, std::pair<N, M>& obj){
     return is >> obj.first >> obj.second;
@@ -148,6 +146,8 @@ template<class N>std::vector<N> operator+(std::vector<N> v1, std::vector<N>& v2)
     v1.insert(v1.end(), v2.begin(), v2.end());
     return v1;
 }
+using V = __vector<long long int>;
+using Vi = __vector<int>;
 /* example */
 using namespace std;
 int main() {
