@@ -1,8 +1,6 @@
-#include <iostream>
-#include <vector>
-#include <set>
-#include <map>
-#include <memory>
+#include <bits/stdc++.h>
+#define V vector<long long int>
+#define Vi vector<int>
 /* std::pair IO */
 template<typename N, typename M> std::istream& operator>>(std::istream& is, std::pair<N, M>& obj){
     return is >> obj.first >> obj.second;
@@ -152,8 +150,20 @@ template<class N>std::vector<N> operator+(std::vector<N> v1, std::vector<N>& v2)
 /* example */
 using namespace std;
 int main() {
-    __vector<int> vec{0, 1, 2, 3, 4, 5};
-    cout << vec[-2] << " " << set(vec.begin(), vec.end()) << endl;
-    print(vec[range(1, 3, 1)], "_", "(EOF)\n");
-    return 0;
+  int n, m; cin >> n >> m;
+  V a(n), b(m);
+  cin >> a >> b;
+  V c = a + b;
+  sort(c.begin(), c.end());
+  V ans;
+  for(auto &i: a){
+    ans.push_back(std::lower_bound(c.begin(), c.end(), i) - c.begin() + 1);
+  }
+  cout << ans << endl;
+  ans.clear();
+  for(auto &i: b){
+    ans.push_back(std::lower_bound(c.begin(), c.end(), i) - c.begin() + 1);
+  }
+  cout << ans << endl;
+  return 0;
 }
