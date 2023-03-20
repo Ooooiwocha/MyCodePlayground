@@ -50,13 +50,26 @@ template<typename N> std::ostream& operator<<(std::ostream& os, const std::vecto
 /* Python-like range class */
 template<typename N> class range{
     private:
-        const N start, end, step;
+        const N start, goal, step;
+        std::vector<N> *vec_ptr = nullptr;
     public:
-        range(const N& start, const N& end, const N& step): start(start), end(end), step(step){
+        range(const N& start, const N& goal, const N& step): start(start), goal(goal), step(step){
             if(this->step == 0){
                 throw std::runtime_error("illegal_parameter: range step must not be zero");
-                
+                *this->vec_ptr = this->to_vector();
             }
+        }
+        auto begin(){
+            return vec_ptr->begin();
+        }
+        auto end(){
+            return vec_ptr->end();
+        }
+        auto rbegin(){
+            return vec_ptr->rbegin();
+        }
+        auto rend(){
+            return vec_ptr->rend();
         }
         range(const N& i, const N& j): range(i, j, 1){
             
@@ -65,25 +78,28 @@ template<typename N> class range{
             
         }
         std::vector<N> to_vector()const{
-            std::vector<N> ret;
-            if(0<step){
-                if(end<=start) return ret;
-                for(N i=start; i<end; i+=step){
-                    ret.push_back(i);
+            if(this->vec_ptr == nullptr){
+                std::vector<N> ret;
+                if(0<step){
+                    if(goal<=start) return ret;
+                    for(N i=start; i<goal; i+=step){
+                        ret.push_back(i);
+                    }
+                } else {
+                    if(start<=goal) return ret;
+                    for(N i=start; i>goal; i+=step){
+                        ret.push_back(i);
+                    }
                 }
-            } else {
-                if(start<=end) return ret;
-                for(N i=start; i>end; i+=step){
-                    ret.push_back(i);
-                }
+                return ret;
             }
-            return ret;
+            return *this->vec_ptr;
         }
         std::vector<N> to_slicer(size_t size)const{
             auto lambda = [&](N a){
                 return 0 <= a? a: size + a;
             };
-            return range(lambda(start), lambda(end), step).to_vector();
+            return range(lambda(start), lambda(goal), step).to_vector();
         }
 };
 /* slicable vector class */
