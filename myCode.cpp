@@ -108,7 +108,7 @@ template<typename N> class range{
         }
 };
 /* slicable vector class */
-template<typename N = int, typename M = int> class __vector: public std::vector<N>{
+template<typename N = int, class R = range<N>> class __vector: public std::vector<N>{
     public:
         using std::vector<N>::vector;
         template<class C> __vector(C& container){
@@ -116,6 +116,7 @@ template<typename N = int, typename M = int> class __vector: public std::vector<
                 this->push_back(*it);
             }
         }
+        //void (&append)(N) = this->push_back;
         N at(long long int index){
             long long int __index = 0<=index? index: this->size() + index;
             return this->std::vector<N>::at(__index);
@@ -124,7 +125,7 @@ template<typename N = int, typename M = int> class __vector: public std::vector<
             long long int __index = 0<=index? index: this->size() + index; 
             return this->at(__index);
         }
-        __vector<N> operator[](range<M> slice){ //Python-like slicing
+        __vector<N> operator[](R slice){ //Python-like slicing
             __vector<N> ret;
             for(auto const &i: slice.to_slicer(this->size())){
                 ret.push_back(this->at(i));
@@ -143,7 +144,6 @@ template<class N> void print(N container, std::string sep=" ", std::string end="
     }
     std::cout << end;
 }
-/* merge of vector */
 template<class N>std::vector<N> operator+(std::vector<N> v1, std::vector<N>& v2){
     v1.insert(v1.end(), v2.begin(), v2.end());
     return v1;
@@ -151,16 +151,16 @@ template<class N>std::vector<N> operator+(std::vector<N> v1, std::vector<N>& v2)
 /* example */
 using namespace std;
 int main() {
-    for(auto const& i: range(3)){
-        for(auto const& j: range(3)){
-            cout << make_pair(i, j) << endl;
-        }
+  ios_base::sync_with_stdio(0);
+  cin.tie();
+  int n; cin >> n;
+  V ans;
+  for(auto &i: range(n)){
+    int a; cin >> a;
+    if(a%2==0){
+      ans.push_back(a);
     }
-    map<int, int> mp;
-    mp[0] = 1;
-    cout << mp << endl;
-    V vec = {1, 2, 3, 4, 3, 2, 1};
-    print(vec, "_", ".\n");
-    cout << vec[range(1, -2, 2)] << endl;
-    return 0;
+  }
+  cout << ans << endl;
+  return 0;
 }
