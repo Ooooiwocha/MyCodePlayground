@@ -80,7 +80,7 @@ template<typename N = int, class R = range<N>> class __vector: public std::vecto
         using std::vector<N>::vector;
         template<class C> __vector(C& container){
             for(auto it=container.begin(); it!=container.end(); it++){
-                this->push.back(*it);
+                this->push_back(*it);
             }
         }
         N at(long long int index){
