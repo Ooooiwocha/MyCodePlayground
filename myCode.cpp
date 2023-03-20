@@ -2,6 +2,7 @@
 #include <vector>
 #include <set>
 #include <map>
+#include <memory>
 /* std::pair IO */
 template<typename N, typename M> std::istream& operator>>(std::istream& is, std::pair<N, M>& obj){
     return is >> obj.first >> obj.second;
@@ -56,8 +57,9 @@ template<typename N> class range{
         range(const N& start, const N& goal, const N& step): start(start), goal(goal), step(step){
             if(this->step == 0){
                 throw std::runtime_error("illegal_parameter: range step must not be zero");
-                *this->vec_ptr = this->to_vector();
             }
+            this->vec_ptr = new std::vector<N>(this->to_vector());
+            
         }
         auto begin(){
             return vec_ptr->begin();
@@ -100,6 +102,11 @@ template<typename N> class range{
                 return 0 <= a? a: size + a;
             };
             return range(lambda(start), lambda(goal), step).to_vector();
+        }
+        virtual ~range(){
+            if(vec_ptr != nullptr){
+                delete this->vec_ptr;
+            }
         }
 };
 /* slicable vector class */
@@ -144,6 +151,6 @@ using namespace std;
 int main() {
     __vector<int> vec{0, 1, 2, 3, 4, 5};
     cout << vec[-2] << " " << set(vec.begin(), vec.end()) << endl;
-    print(vec[range(5, -2, 1)], "_", "(EOF)\n");
+    print(vec[range(1, 3, 1)], "_", "(EOF)\n");
     return 0;
 }
