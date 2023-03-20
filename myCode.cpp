@@ -145,7 +145,10 @@ template<class N> void print(N container, std::string sep=" ", std::string end="
     }
     std::cout << end;
 }
-
+template<class N>std::vector<N> operator+(std::vector<N> v1, std::vector<N>& v2){
+    v1.insert(v1.end(), v2.begin(), v2.end());
+    return v1;
+}
 /* example */
 using namespace std;
 int main() {
