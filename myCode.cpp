@@ -1,6 +1,6 @@
 #include <bits/stdc++.h>
-#define V vector<long long int>
-#define Vi vector<int>
+#define V __vector<long long int>
+#define Vi __vector<int>
 /* std::pair IO */
 template<typename N, typename M> std::istream& operator>>(std::istream& is, std::pair<N, M>& obj){
     return is >> obj.first >> obj.second;
@@ -108,7 +108,7 @@ template<typename N> class range{
         }
 };
 /* slicable vector class */
-template<typename N = int, class R = range<N>> class __vector: public std::vector<N>{
+template<typename N = int, typename M = int> class __vector: public std::vector<N>{
     public:
         using std::vector<N>::vector;
         template<class C> __vector(C& container){
@@ -124,7 +124,7 @@ template<typename N = int, class R = range<N>> class __vector: public std::vecto
             long long int __index = 0<=index? index: this->size() + index; 
             return this->at(__index);
         }
-        __vector<N> operator[](R slice){ //Python-like slicing
+        __vector<N> operator[](range<M> slice){ //Python-like slicing
             __vector<N> ret;
             for(auto const &i: slice.to_slicer(this->size())){
                 ret.push_back(this->at(i));
@@ -160,7 +160,7 @@ int main() {
     mp[0] = 1;
     cout << mp << endl;
     V vec = {1, 2, 3, 4, 3, 2, 1};
-    print(vec, "_", ".");
+    print(vec, "_", ".\n");
     cout << vec[range(1, -2, 2)] << endl;
     return 0;
 }
