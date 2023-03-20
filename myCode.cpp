@@ -151,20 +151,16 @@ template<class N>std::vector<N> operator+(std::vector<N> v1, std::vector<N>& v2)
 /* example */
 using namespace std;
 int main() {
-  int n, m; cin >> n >> m;
-  V a(n), b(m);
-  cin >> a >> b;
-  V c = a + b;
-  sort(c.begin(), c.end());
-  V ans;
-  for(auto &i: a){
-    ans.push_back(std::lower_bound(c.begin(), c.end(), i) - c.begin() + 1);
-  }
-  cout << ans << endl;
-  ans.clear();
-  for(auto &i: b){
-    ans.push_back(std::lower_bound(c.begin(), c.end(), i) - c.begin() + 1);
-  }
-  cout << ans << endl;
-  return 0;
+    for(auto const& i: range(3)){
+        for(auto const& j: range(3)){
+            cout << make_pair(i, j) << endl;
+        }
+    }
+    map<int, int> mp;
+    mp[0] = 1;
+    cout << mp << endl;
+    V vec = {1, 2, 3, 4, 3, 2, 1};
+    print(vec, "_", ".");
+    cout << vec[range(1, -2, 2)] << endl;
+    return 0;
 }
