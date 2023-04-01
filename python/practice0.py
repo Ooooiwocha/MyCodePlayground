@@ -8,6 +8,7 @@ from selenium.webdriver.common.keys import Keys
 import os;
 import time
 
+
 url = input("input community url");
 driver = webdriver.Chrome();
 ##driver.maximize_window();
@@ -39,8 +40,16 @@ for elem in arr:
 		driver.execute_script("window.scrollBy(0, 1000);");
 		wait.until(EC.presence_of_all_elements_located((By.CSS_SELECTOR, 'div[id^="body"]')))
 		time.sleep(0.0025);
-	
-	commentsection = driver.find_element(By.CSS_SELECTOR, 'ytd-item-section-renderer[id^="sections"]');
+	try:
+		commentsection = driver.find_element(By.CSS_SELECTOR, 'ytd-item-section-renderer[id^="sections"]');
+	except Exception as e:
+		msg = driver.find_elements(By.CSS_SELECTOR, 'yt-formatted-string[id="message"]');
+		if len(msg):
+			driver.execute_script("window.close();")
+			driver.switch_to.window(driver.window_handles[0]);
+			continue;
+		print(e);
+		exit();
 	buttons = commentsection.find_elements(By.CSS_SELECTOR, 'ytd-button-renderer[id^="more-replies-icon"]');
 
 	for button in buttons:
