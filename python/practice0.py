@@ -44,10 +44,10 @@ for elem in arr:
 		commentsection = driver.find_element(By.CSS_SELECTOR, 'ytd-item-section-renderer[id^="sections"]');
 	except Exception as e:
 		msg = driver.find_elements(By.CSS_SELECTOR, 'yt-formatted-string[id="message"]');
-		if len(msg):
+		if len(msg): ## continue if comment section is turned off
 			driver.execute_script("window.close();")
 			driver.switch_to.window(driver.window_handles[0]);
-			continue;
+			continue; 
 		print(e);
 		exit();
 	buttons = commentsection.find_elements(By.CSS_SELECTOR, 'ytd-button-renderer[id^="more-replies-icon"]');
